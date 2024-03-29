@@ -29,6 +29,12 @@ public class User {
         System.out.println("Email verification sent");
     }
 }
+/*
+    Why it is problematic: The User class violates SRP by handling both user properties management and 
+    user-related operations like saving to a database and sending email verifications. Changes in the database
+    schema or the email sending process would require modifications to the User class, making it 
+    less cohesive and more prone to errors.
+ */
 
 //Better Code
 
@@ -57,6 +63,13 @@ public class EmailService {
         System.out.println("Email verification sent");
     }
 }
+
+/*
+    Why it is better: The responsibilities are now divided among three classes: User handles user properties,
+    UserRepository deals with database operations, and EmailService takes care of sending emails. 
+    This separation makes the system more modular, easier to maintain, and adheres to SRP.
+ */
+
 // <==================================================================================>
 
 // Example 2 : Report Generation and Printing
@@ -74,6 +87,12 @@ public class Report {
     }
 }
 
+/*
+   Why it is problematic: The Report class is responsible for both generating and printing reports. 
+   If the method of report generation or the printing mechanism changes, the Report class must be modified, 
+   violating SRP.
+*/
+
 //Better Code
 
 public class Report {
@@ -89,6 +108,12 @@ public class ReportPrinter {
         System.out.println("Report printed");
     }
 }
+
+/*
+   Why it is better: This version separates the responsibilities into two classes: Report for report 
+   generation and ReportPrinter for printing. This makes each class adhere to a single responsibility, 
+   simplifying maintenance and scalability.
+*/
 // <==================================================================================>
 
 //Example 3: Employee Management
@@ -113,6 +138,12 @@ public class Employee {
         // Generate report for the employee
     }
 }
+
+/*
+   Why it is problematic: The Employee class is handling multiple responsibilities: managing employee 
+   properties, calculating pay, persisting employee details, and generating reports. This violates SRP 
+   and makes the class complex and harder to maintain.
+*/
 
 
 //Better Code
@@ -142,6 +173,12 @@ public class ReportGenerator {
     }
 }
 
+/*
+   Why it is better: This approach distributes the responsibilities across four classes, each handling 
+   a specific aspect of employee management. It adheres to SRP, making the system more modular, 
+   easier to understand, and maintain.
+*/
+
 // <==================================================================================>
 
 //Example 4 : Order Processing
@@ -163,6 +200,12 @@ public class Order {
     public void updateOrder() { /*...*/ }
     public void deleteOrder() { /*...*/ }
 }
+
+/*
+   Why it is problematic: The Order class is overloaded with responsibilities, from managing order items 
+   and calculating totals to persisting orders and presenting them. This makes the class complex and 
+   challenging to maintain.
+*/
 
 //Better Code
 
@@ -186,6 +229,12 @@ public class OrderUI {
     public void showOrder(Order order) { /*...*/ }
 }
 
+/*
+   Why it is better: This design separates the concerns into distinct classes: Order for managing order data, 
+   OrderPersistence for database operations, and OrderUI for user interface operations. Each class now 
+   adheres to SRP, simplifying modifications and testing.
+*/
+
 // <==================================================================================>
 
 //Example 5 : User Settings Management
@@ -199,6 +248,12 @@ public class UserSettings {
     public void loadSettings(User user) { /* Load user settings */ }
 }
 
+/*
+   Why it is problematic: UserSettings manages both the modification of user settings and the persistence 
+   of these settings. Changes in how settings are changed or how they're saved/loaded would affect this class,
+   violating SRP.
+*/
+
 //Better Code
 
 public class UserSettings {
@@ -210,6 +265,12 @@ public class SettingsPersistence {
     public void saveSettings(User user) { /* Save settings to a file or database */ }
     public void loadSettings(User user) { /* Load user settings */ }
 }
+
+/*
+   plitting the responsibilities into UserSettings for managing the settings and SettingsPersistence for 
+   handling the saving/loading of settings adheres to SRP. It simplifies each class, making them easier 
+   to maintain and extend.
+*/
 // <==================================================================================>
 
 
